@@ -30,7 +30,9 @@ export default function SignupForm() {
     confirmPassword: "",
   });
 
-  const [errors, setErrors] = useState<Partial<Record<keyof SignUpSchema, string>>>({});
+  const [errors, setErrors] = useState<
+    Partial<Record<keyof SignUpSchema, string>>
+  >({});
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     // Handle input changes
@@ -43,9 +45,8 @@ export default function SignupForm() {
     const res = SignupFormSchema.safeParse(formData);
 
     if (!res.success) {
-
       const fieldErrors: Partial<Record<keyof SignUpSchema, string>> = {};
-      
+
       res.error.issues.forEach((err) => {
         if (err.path.length > 0) {
           fieldErrors[err.path[0] as keyof SignUpSchema] = err.message;
